@@ -21,6 +21,7 @@ dependencies {
     implementation("io.javalin:javalin:5.5.0")
     implementation("org.slf4j:slf4j-simple:2.0.7")
     implementation("com.google.code.gson:gson:2.10.1")
+    implementation("io.javalin.community.ssl:ssl-plugin:5.5.0")
 }
 
 tasks {
