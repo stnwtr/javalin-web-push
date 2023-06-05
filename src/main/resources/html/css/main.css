@@ -1,6 +1,51 @@
+:root {
+    --red-500: #ef4444;
+    --red-600: #dc2626;
+    --red-700: #b91c1c;
+    --slate-500: #64748b
+}
+
 * {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
     box-sizing: border-box;
+}
+
+main {
+    width: 100vw;
+    height: 100vh;
+    padding: 2rem;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    place-items: center;
+    place-content: center;
+}
+
+button {
+    all: unset;
+    justify-self: end;
+}
+
+button {
+    background-color: var(--red-500);
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--red-600);
+}
+
+button:active {
+    background-color: var(--red-700);
+}
+
+div {
+    width: 100%;
+    align-self: center;
 }
