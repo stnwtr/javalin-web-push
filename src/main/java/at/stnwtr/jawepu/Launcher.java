@@ -30,6 +30,7 @@ public class Launcher {
                 sslConfig.sniHostCheck = false;
                 sslConfig.tlsConfig = TLSConfig.INTERMEDIATE;
             }));
+            config.plugins.enableDevLogging();
         };
 
         new App(javalinConfig);

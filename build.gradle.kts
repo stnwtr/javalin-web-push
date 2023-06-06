@@ -22,6 +22,7 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:2.0.7")
     implementation("com.google.code.gson:gson:2.10.1")
     implementation("io.javalin.community.ssl:ssl-plugin:5.5.0")
+    implementation("nl.martijndwars:web-push:5.1.1")
 }
 
 tasks {
