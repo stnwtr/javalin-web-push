@@ -1,10 +1,6 @@
 class Status {
     constructor(id) {
         this.element = document.getElementById(id)
-        this.clear()
-    }
-
-    clear() {
         this.element.innerText = ""
     }
 
@@ -88,7 +84,7 @@ async function getPubKey() {
     const status = new Status("pubkey-status")
     status.add("Fetch vapid public key")
 
-    const key = await fetch("https://localhost:30041/api/vapid/public.key")
+    const key = await fetch(window.location.origin + "/api/vapid/public.key")
         .then(value => value.text())
         .catch(_ => null)
 
@@ -99,8 +95,6 @@ async function getPubKey() {
         vapidPublicKey = key
     }
 }
-
-let x = null
 
 async function subscribe() {
     const status = new Status("sub-status")
@@ -115,9 +109,13 @@ async function subscribe() {
         userVisibleOnly: true,
         applicationServerKey: vapidPublicKey
     })
-    x = subscription
-    console.log(subscription)
     status.add("Subscribed!")
+
+    const response = await fetch(window.location.origin + "/api/subscribe", {
+        method: "post",
+        body: JSON.stringify(subscription)
+    }).then(x => x.text())
+    status.add("Sent to server: " + response)
 }
 
 async function unsubscribe() {
@@ -132,10 +130,30 @@ async function unsubscribe() {
 
     const unreg = await registration.unregister()
     status.add("Unregistered: " + unreg)
+
+    const response = await fetch(window.location.origin + "/api/unsubscribe", {
+        method: "delete"
+    }).then(x => x.text())
+    status.add("Sent to server: " + response)
+
+    let time = 3
+    setInterval(() => {
+        status.add("Refreshing in " + time--)
+        if (time <= 0) {
+            window.location.reload()
+        }
+    }, 1000)
 }
 
 async function serverNotification() {
-    // TBD
+    const status = new Status("server-status")
+    status.add("Requesting server push notification")
+
+    const response = await fetch(window.location.origin + "/api/push", {
+        method: "post"
+    }).then(x => x.text())
+
+    status.add("Sent to server: " + response)
 }
 
 let vapidPublicKey = null;

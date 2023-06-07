@@ -5,11 +5,14 @@ import io.javalin.community.ssl.SSLPlugin;
 import io.javalin.community.ssl.TLSConfig;
 import io.javalin.config.JavalinConfig;
 import io.javalin.plugin.bundled.CorsPluginConfig;
+import org.jose4j.lang.BouncyCastleProviderHelp;
 
 import java.util.function.Consumer;
 
 public class Launcher {
     public static void main(String[] args) {
+        BouncyCastleProviderHelp.enableBouncyCastleProvider();
+
         Consumer<JavalinConfig> javalinConfig = config -> {
             config.showJavalinBanner = false;
             config.plugins.enableCors(corsContainer -> corsContainer.add(CorsPluginConfig::anyHost));
